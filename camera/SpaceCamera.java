@@ -15,12 +15,23 @@ import com.jogamp.opengl.math.VectorUtil;
 final public class SpaceCamera
 	extends AbstractCamera	
 {
+	/**
+	 * 
+	 */
 	private float[] frontVector;
-	
+	/**
+	 * 
+	 */
 	private float[] upVector;
+	/**
+	 * 
+	 */
 	final private float ANGLE = (float) (Math.PI / 16);
 	transient Matrix4 matrix;
 	transient float[] swap;
+	/**
+	 * Construct a default space camera.
+	 */
 	public SpaceCamera ()
 	{
 		this.frontVector = new float[] {1, 0, 0, 1};
@@ -28,18 +39,37 @@ final public class SpaceCamera
 		this.matrix = new Matrix4 ();
 		this.swap = new float[4];
 	}
-	
+	public SpaceCamera (double[] eye, double[] center, double[] up)
+	{
+		super (eye, center, up);
+		this.frontVector = new float[] {1, 0, 0, 1};
+		this.upVector = new float[] {(float) up [0], (float) up [1], (float) up [2], 1};
+		this.matrix = new Matrix4 ();
+		this.swap = new float[4];
+	}
+	public SpaceCamera (double[] eye, float[] frontVector, float[] upVector)
+	{
+		this.eye = new double[] {eye [0], eye [1], eye[2]};
+		this.frontVector = new float[] {frontVector [0], frontVector [1], frontVector [2], 1};
+		this.upVector = new float[] {upVector [0], upVector [1], upVector [2], 1};
+		this.matrix = new Matrix4 ();
+		this.swap = new float[4];
+		this.updateCenterUp ();
+	}
 	private void rotate (float[] axis, float angle)
 	{
+		this.matrix.loadIdentity ();
 		// calculate rotation matrix
+		/*
 		float beta = (float) Math.atan2 (axis [2], axis [0]);
 		float gama = (float) Math.atan2 (axis [1], Math.sqrt (axis [0] * axis [0] + axis [2] * axis [2]));
-		this.matrix.loadIdentity ();
 		this.matrix.rotate (-beta, 0, 1, 0);
 		this.matrix.rotate (gama, 0, 0, 1);
 		this.matrix.rotate (angle, 1, 0, 0);
 		this.matrix.rotate (-gama, 0, 0, 1);
 		this.matrix.rotate (beta, 0, 1, 0);
+		*/
+		this.matrix.rotate (angle, axis [0], axis [1], axis [2]);
 		float[] s;
 		// update frontVector and upVector
 		this.matrix.multVec (this.frontVector, this.swap);
@@ -79,11 +109,11 @@ final public class SpaceCamera
 				return true;
 			case 'w':
 				VectorUtil.crossVec3 (this.swap, this.frontVector, this.upVector);
-				rotate (this.upVector, this.ANGLE);
+				rotate (this.swap, this.ANGLE);
 				return true;
 			case 's':
 				VectorUtil.crossVec3 (this.swap, this.frontVector, this.upVector);
-				this.rotate (this.upVector, -this.ANGLE);
+				this.rotate (this.swap, -this.ANGLE);
 				return true;
 			case 'q':
 				rotate (this.frontVector, -this.ANGLE);
