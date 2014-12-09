@@ -20,21 +20,32 @@ public class Palm
 	
 	static
 	{
-		RULES = new Productions<Palm.Symbol> (Symbol.STEM, new Palm.Symbol[] {Symbol.TRUNK, Symbol.STEM});
-		Palm.RULES.put (Symbol.TRUNK, new Palm.Symbol[] {
-			Symbol.TRUNK,
-			Symbol.TRUNK,
-			Symbol.LEAF});
+		RULES = new Productions<Palm.Symbol> (Symbol.TRUNK_STEM, new Palm.Symbol[] {Symbol.NEW_TRUNK, Symbol.TRUNK_STEM});
+		Palm.RULES.put (Symbol.NEW_TRUNK, new Palm.Symbol[] {
+			Symbol.OLD_TRUNK,
+			Symbol.LEFT_PARENTHIS,
+			Symbol.LEAF_STEM,
+			Symbol.RIGHT_PARENTHIS,
+			Symbol.NEW_TRUNK
+		});
+		Palm.RULES.put (Symbol.LEAF_STEM, new Palm.Symbol[] {
+			Symbol.LEAF,
+			Symbol.LEAF_STEM
+		});
+		Palm.RULES.put (Symbol.LEAF, new Palm.Symbol[] {
+			Symbol.LEAF,
+			Symbol.LEAF
+		});
 	}
 	final private Word<Palm.Symbol> word;
 	Palm ()
 	{
-		this.word = new Word (Symbol.STEM);
+		this.word = new Word (Symbol.TRUNK_STEM);
 	}
 	
 	void paint (GL2 gl)
 	{
-		this.word.paint (gl);
+		this.word.paintDebug (gl);
 	}
 	
 	void grow ()
@@ -47,7 +58,7 @@ public class Palm
 	private static enum Symbol 
 		implements grammar.Symbol
 	{
-		TRUNK ('T')
+		NEW_TRUNK ('T')
 		{
 			@Override
 			public void paint (GL2 gl)
@@ -67,7 +78,40 @@ public class Palm
 				gl.glRotatef (2, 0, 1, 0);
 			}
 		},
-		STEM ('s')
+		OLD_TRUNK ('T')
+		{
+			@Override
+			public void paint (GL2 gl)
+			{
+				gl.glColor3f (0.5f, 0.1f, 0);
+				gl.glBegin (GL2.GL_QUAD_STRIP);
+				gl.glVertex3f (0, 0, 0);
+				gl.glVertex3f (0, 1, 0);
+				gl.glVertex3f (0, 0, 1);
+				gl.glVertex3f (0, 1, 1);
+				gl.glVertex3f (1, 0, 1);
+				gl.glVertex3f (1, 1, 1);
+				gl.glVertex3f (1, 0, 0);
+				gl.glVertex3f (1, 1, 0);
+				gl.glEnd ();
+				gl.glTranslatef (0, 1, 0);
+				gl.glRotatef (2, 0, 1, 0);
+			}
+		},
+		TRUNK_STEM ('s')
+		{
+			@Override
+			public void paint (GL2 gl)
+			{
+				gl.glColor3f (0.25f, 1, 0.25f);
+				gl.glBegin (GL.GL_LINE_STRIP);
+				gl.glVertex3f (0, 0, 0);
+				gl.glVertex3f (1, 0, 0);
+				gl.glVertex3f (0.5f, 1, 0);
+				gl.glEnd ();
+			}
+		},
+		LEAF_STEM ('l')
 		{
 			@Override
 			public void paint (GL2 gl)
@@ -81,7 +125,7 @@ public class Palm
 			}
 		},
 		LEAF ('L')
-{
+		{
 			@Override
 			public void paint (GL2 gl)
 			{
@@ -91,6 +135,22 @@ public class Palm
 				gl.glVertex3f (1, 0, 0);
 				gl.glEnd ();
 				gl.glTranslatef (1, 0, 0);
+			}
+		},
+		LEFT_PARENTHIS ('[')
+		{
+			@Override
+			public void paint (GL2 gl)
+			{
+				gl.glPushMatrix ();
+			}
+		},
+		RIGHT_PARENTHIS (']')
+		{
+			@Override
+			public void paint (GL2 gl)
+			{
+				gl.glPopMatrix ();
 			}
 		};
 		
