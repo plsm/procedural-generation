@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package grammar;
 
 import java.util.Arrays;
@@ -17,7 +13,7 @@ final public class Productions<S extends Symbol>
 {
 	final Map<S, List<S>> rules;
 	
-	Productions (S head, S[] body)
+	public Productions (S head, S[] body)
 	{
 		this.rules = new HashMap<S, List<S>> ();
 		this.put (head, body);

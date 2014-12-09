@@ -13,7 +13,7 @@ import java.util.ListIterator;
  */
 public class Algorithm
 {
-	static <S extends Symbol> void apply (Word<S> word, Productions<S> productions)
+	public static <S extends Symbol> void apply (Word<S> word, Productions<S> productions)
 	{
 		ListIterator<S> iterator = word.getSymbols ().listIterator ();
 		while (iterator.hasNext ()) {
