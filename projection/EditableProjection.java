@@ -27,15 +27,16 @@ public class EditableProjection
 	 * @param min The minimum value of the distance between the center axis and the left, right, bottom, up and near planes.
 	 * @param delta 
 	 */
-	EditableProjection (float min, float delta)
+	public EditableProjection (boolean perspectiveProjection, int horizontal, int vertical, int near, int far, float min, float delta)
 	{
+		super (perspectiveProjection, horizontal, vertical, near, far);
 		this.MIN = Math.abs (min);
 		this.DELTA = Math.abs (delta);
 	}
 
-	public EditableProjection ()
+	public EditableProjection (boolean perspectiveProjection, int horizontal, int vertical, int near, int far)
 	{
-		throw new UnsupportedOperationException ("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this (perspectiveProjection, horizontal, vertical, near, far, 1.0f, 0.1f);
 	}
 	/**
 	 * 
