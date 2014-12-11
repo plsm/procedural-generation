@@ -1,6 +1,7 @@
 package grammar;
 
 import java.util.LinkedList;
+import java.util.List;
 import javax.media.opengl.GL2;
 
 /**
@@ -13,7 +14,7 @@ public class Word<S extends Symbol>
 	/**
 	 * The symbols that make up this word.
 	 */
-	protected LinkedList<S> symbols;
+	protected List<S> symbols;
 	/**
 	 * Construct a self drawing word with a symbol seed.
 	 *
@@ -21,8 +22,17 @@ public class Word<S extends Symbol>
 	 */
 	public Word (S seed)
 	{
-		this.symbols = new LinkedList<S> ();
+		this.symbols = new LinkedList<> ();
 		this.symbols.add (seed);
+	}
+	/**
+	 * Construct a self drawing word with a symbol seed.
+	 *
+	 * @param seed 
+	 */
+	public Word (S[] symbols)
+	{
+		this.symbols = new LinkedList<> (java.util.Arrays.asList (symbols));
 	}
 	/**
 	 * Paint this word.  Each symbol of the alphabet is responsible for drawing.
@@ -57,7 +67,7 @@ public class Word<S extends Symbol>
 	 *
 	 * @return the symbols in this word.
 	 */
-	LinkedList<S> getSymbols ()
+	List<S> getSymbols ()
 	{
 		return symbols;
 	}
