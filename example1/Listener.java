@@ -86,9 +86,9 @@ public class Listener
 		gl.glVertex3d( 1, -1, 1);  gl.glVertex3d( 1, -1,-1);
 		gl.glVertex3d(-1, -1, 1);  gl.glVertex3d(-1, -1,-1);
 		gl.glEnd();
-		gl.glTranslated (-5 * 20, 0, 0);
-		for (int i = 0; i < 10; i++) {
-			gl.glTranslatef (20, 0, 0);
+		gl.glTranslated (-0 * 20, 0, 0);
+		for (int i = 0; i < 1; i++) {
+			gl.glTranslatef (20, -50, 0);
 			this.grass.paint (gl);
 		}
 	}
