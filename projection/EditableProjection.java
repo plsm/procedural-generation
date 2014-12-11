@@ -24,8 +24,13 @@ public class EditableProjection
 	final float DELTA;
 	/**
 	 * Construct an editable projection
+	 * @param perspectiveProjection
+	 * @param horizontal
+	 * @param vertical initial distance if the top and bottom planes.
+	 * @param near initial distance of the near plane.
+	 * @param far initial distance of the far plane.
 	 * @param min The minimum value of the distance between the center axis and the left, right, bottom, up and near planes.
-	 * @param delta 
+	 * @param delta How much does the projection planes change when the user presses a key.
 	 */
 	public EditableProjection (boolean perspectiveProjection, int horizontal, int vertical, int near, int far, float min, float delta)
 	{
@@ -33,7 +38,14 @@ public class EditableProjection
 		this.MIN = Math.abs (min);
 		this.DELTA = Math.abs (delta);
 	}
-
+	/**
+	 * 
+	 * @param perspectiveProjection
+	 * @param horizontal
+	 * @param vertical
+	 * @param near
+	 * @param far 
+	 */
 	public EditableProjection (boolean perspectiveProjection, int horizontal, int vertical, int near, int far)
 	{
 		this (perspectiveProjection, horizontal, vertical, near, far, 1.0f, 0.1f);
