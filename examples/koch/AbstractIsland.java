@@ -102,6 +102,11 @@ public class AbstractIsland
 			this.code = code;
 		}
 		@Override
+		public char getCode ()
+		{
+			return code;
+		}
+		@Override
 		public String toString ()
 		{
 			return String.valueOf (this.code);

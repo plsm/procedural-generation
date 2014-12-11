@@ -48,8 +48,7 @@ public class Listener
 			new double[] {0, 0, 3},
 			new float[] {0, 0, -1},
 			new float[] {0, 1, 0});
-		this.projection = new EditableProjection (true, 10, 10, 1, 10, 1, 1);
-		this.status ();
+		this.projection = new EditableProjection (true, 100, 100, 1, 10, 1, 1);
 		this.dolSystem = null;
 	}
 	
@@ -81,7 +80,7 @@ public class Listener
 		
 		GLU glu = GLU.createGLU (gl);
 		this.camera.placeCamera (glu);
-		gl.glTranslatef (0, -20, 0);
+		gl.glTranslatef (0, -100, 0);
 		if (this.dolSystem != null) {
 			this.dolSystem.paint (gl);
 		}

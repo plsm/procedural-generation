@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package projection;
 
 import javax.media.opengl.GL2;
@@ -12,5 +8,9 @@ import javax.media.opengl.GL2;
  */
 public interface Projection
 {
+	/**
+	 * 
+	 * @param glu 
+	 */
 	public void setupProjection (GL2 glu);
 }

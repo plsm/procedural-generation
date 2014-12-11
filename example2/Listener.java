@@ -49,7 +49,7 @@ public class Listener
 			new double[] {0, 0, 3},
 			new float[] {0, 0, -1},
 			new float[] {0, 1, 0});
-		this.projection = new EditableProjection (true, 10, 10, 1, 10);
+		this.projection = new EditableProjection (true, 100, 100, 1, 10);
 		this.status ();
 	}
 	public void init (GLAutoDrawable glad)
@@ -71,7 +71,7 @@ public class Listener
 		
 		GLU glu = GLU.createGLU (gl);
 		this.camera.placeCamera (glu);
-		gl.glTranslatef (0, -20, 0);
+		gl.glTranslatef (0, -100, 0);
 		this.grass.paint (gl);
 	}
 

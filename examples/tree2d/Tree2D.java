@@ -6,11 +6,16 @@
 
 package examples.tree2d;
 
-import grammar.AbstractSymbol;
+import grammar.symbol.Bracket;
+import grammar.Alphabet;
 import grammar.DOL_System;
+import grammar.Productions;
 import grammar.Symbol;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
+import grammar.Word;
+import grammar.symbol.Forward;
+import grammar.symbol.Move;
+import grammar.symbol.Rotate;
+import grammar.symbol.Stem;
 
 /**
  *
@@ -21,111 +26,118 @@ public class Tree2D
 {
 	/**
 	 * 
+	 * @param delta
+	 * @param angle
+	 * @return 
 	 */
-	private final int delta;
+	static private Alphabet createAlphabet (int delta, float angle)
+	{
+		Forward forward = new Forward (delta, 1f, 0f, 0f);
+		Move move = new Move (delta);
+		Rotate plus = Rotate.Plus (angle);
+		Rotate minus = Rotate.Minus (angle);
+		return new Alphabet (new Symbol[] {
+			forward,
+			move,
+			plus,
+			minus,
+			Bracket.LEFT,
+			Bracket.RIGHT
+		});
+	}
+	static private Alphabet createAlphabetWithSteam (int delta, float angle)
+	{
+		return createAlphabet (delta, angle).add (Stem.X);
+	}
 	/**
-	 * 
-	 */
-	private final int angle;
-	/**
-	 * 
-	 */
-	private final Word<Symbol> SEED;
-	/**
-	 * 
-	 */
-	private final Productions<Symbol> RULES;
-	/**
-	 * 
+	 * Generate a tree by calculating <i>n=5</i> derivations.
 	 */
 	static public Tree2D createTree1 ()
 	{
-		SEED = new Word<> (new Tree2D.FORWARD ());
-		RULES = new Productions<> (Tree2D.FORWARD, new Island.Symbol[] {
-			Tree2D.FORWARD,
-			Bracket.RIGHT,
-			Tree2D.PLUS,
-			Tree2D.FORWARD,
-			Bracket.LEFT,
-			Tree2D.FORWARD,
-			Bracket.RIGHT,
-			Tree2D.MINUS,
-			Bracket.FORWARD
-		});
-	}
-	
-	/**
-	 * 
-	 */
-	final public class FORWARD
-		extends AbstractSymbol
-	{
-		/**
-		 * 
-		 */
-		public FORWARD ()
-		{
-			super ('F');
-		}
-		/**
-		 * 
-		 * @param gl 
-		 */
-		@Override
-		public void paint (GL2 gl)
-		{
-			gl.glColor3f (1, 0, 0);
-			gl.glBegin (GL.GL_LINE_STRIP);
-			gl.glVertex3d (0, 0, 0);
-			gl.glVertex3d (delta, 0, 0);
-			gl.glEnd ();
-			gl.glTranslated (delta, 0, 0);
-		}
+		int delta = 5;
+		float angle = 25.7f;
+		Alphabet alphabet = createAlphabet (delta, angle);
+		Word seed = new Word<> (alphabet.get ('F'));
+		Productions rules = new Productions ();
+		rules.put ('F', "F[+F]F[-F]F", alphabet);
+		return new Tree2D (seed, rules);
 	}
 	/**
-	 * 
+	 * Generate a tree by calculating <i>n=5</i> derivations.
 	 */
-	final public class PLUS
-		extends AbstractSymbol
+	static public Tree2D createTree2 ()
 	{
-		/**
-		 * 
-		 */
-		public PLUS ()
-		{
-			super ('+');
-		}
-		/**
-		 * 
-		 * @param gl 
-		 */
-		@Override
-		public void paint (GL2 gl)
-		{
-			gl.glRotated (angle, 0, 0, 1);
-		}
+		int delta = 5;
+		int angle = 20;
+		Alphabet alphabet = createAlphabet (delta, angle);
+		Word seed = new Word<> (alphabet.get ('F'));
+		Productions rules = new Productions ();
+		rules.put ('F', "F[+F]F[-F][F]", alphabet);
+		return new Tree2D (seed, rules);
+	}
+	/**
+	 * Generate a tree by calculating <i>n=4</i> derivations.
+	 */
+	static public Tree2D createTree3 ()
+	{
+		int delta = 5;
+		float angle = 22.5f;
+		Alphabet alphabet = createAlphabet (delta, angle);
+		Word seed = new Word<> (alphabet.get ('F'));
+		Productions rules = new Productions ();
+		rules.put ('F', "FF-[-F+F+F]+[+F-F-F]", alphabet);
+		return new Tree2D (seed, rules);
+	}
+	/**
+	 * Generate a tree by calculating <i>n=7</i> derivations.
+	 */
+	static public Tree2D createTree4 ()
+	{
+		int delta = 5;
+		float angle = 20;
+		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
+		Word seed = new Word<> (alphabet.get ('X'));
+		Productions rules = new Productions ();
+		rules.put ('X', "F[+X]F[-X]+X", alphabet);
+		rules.put ('F', "FF", alphabet);
+		return new Tree2D (seed, rules);
+	}
+	/**
+	 * Generate a tree by calculating <i>n=7</i> derivations.
+	 */
+	static public Tree2D createTree5 ()
+	{
+		int delta = 5;
+		float angle = 25.7f;
+		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
+		Word seed = new Word<> (alphabet.get ('X'));
+		Productions rules = new Productions ();
+		rules.put ('X', "F[+X][-X]FX", alphabet);
+		rules.put ('F', "FF", alphabet);
+		return new Tree2D (seed, rules);
+	}
+	/**
+	 * Generate a tree by calculating <i>n=5</i> derivations.
+	 */
+	static public Tree2D createTree6 ()
+	{
+		int delta = 5;
+		float angle = 22.5f;
+		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
+		Word seed = new Word<> (alphabet.get ('X'));
+		Productions rules = new Productions ();
+		rules.put ('X', "F-[[X]+X]+F[+FX]-X", alphabet);
+		rules.put ('F', "FF", alphabet);
+		return new Tree2D (seed, rules);
 	}
 	/**
 	 * 
+	 * @param seed
+	 * @param rules 
 	 */
-	final static public class MINUS
-		extends AbstractSymbol
+	private Tree2D (Word seed, Productions rules)
 	{
-		/**
-		 * 
-		 */
-		public MINUS ()
-		{
-			super ('-');
-		}
-		/**
-		 * 
-		 * @param gl 
-		 */
-		@Override
-		public void paint (GL2 gl)
-		{
-			gl.glRotated (-Edge.angle, 0, 0, 1);
-		}
+		super (seed, rules);
+		rules.debug ();
 	}
 }

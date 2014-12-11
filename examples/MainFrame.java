@@ -6,6 +6,7 @@
 
 package examples;
 
+import examples.tree2d.Tree2D;
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
@@ -48,15 +49,29 @@ public class MainFrame extends javax.swing.JFrame
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents()
    {
+      java.awt.GridBagConstraints gridBagConstraints;
 
+      modelsButtonGroup = new javax.swing.ButtonGroup();
       splitPane = new javax.swing.JSplitPane();
       exampleSelectionPanel = new javax.swing.JPanel();
       kochIslandRadioButton = new javax.swing.JRadioButton();
+      jPanel1 = new javax.swing.JPanel();
+      jPanel2 = new javax.swing.JPanel();
+      tree1RadioButton = new javax.swing.JRadioButton();
+      tree2RadioButton = new javax.swing.JRadioButton();
+      tree3RadioButton = new javax.swing.JRadioButton();
+      jPanel3 = new javax.swing.JPanel();
+      tree4RadioButton = new javax.swing.JRadioButton();
+      tree5RadioButton = new javax.swing.JRadioButton();
+      tree6RadioButton = new javax.swing.JRadioButton();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setMinimumSize(new java.awt.Dimension(800, 600));
+      setPreferredSize(new java.awt.Dimension(800, 600));
 
       exampleSelectionPanel.setLayout(new java.awt.GridBagLayout());
 
+      modelsButtonGroup.add(kochIslandRadioButton);
       kochIslandRadioButton.setText("koch island");
       kochIslandRadioButton.addActionListener(new java.awt.event.ActionListener()
       {
@@ -65,7 +80,90 @@ public class MainFrame extends javax.swing.JFrame
             kochIslandRadioButtonActionPerformed(evt);
          }
       });
-      exampleSelectionPanel.add(kochIslandRadioButton, new java.awt.GridBagConstraints());
+      gridBagConstraints = new java.awt.GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      exampleSelectionPanel.add(kochIslandRadioButton, gridBagConstraints);
+
+      jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("bracket OL-Systems plants"));
+      jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+      jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("edge-rewrite"));
+
+      modelsButtonGroup.add(tree1RadioButton);
+      tree1RadioButton.setText("tree 1");
+      tree1RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree1RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel2.add(tree1RadioButton);
+
+      modelsButtonGroup.add(tree2RadioButton);
+      tree2RadioButton.setText("tree 2");
+      tree2RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree2RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel2.add(tree2RadioButton);
+
+      modelsButtonGroup.add(tree3RadioButton);
+      tree3RadioButton.setText("tree 3");
+      tree3RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree3RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel2.add(tree3RadioButton);
+
+      jPanel1.add(jPanel2);
+
+      jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("node-rewrite"));
+
+      modelsButtonGroup.add(tree4RadioButton);
+      tree4RadioButton.setText("tree 4");
+      tree4RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree4RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel3.add(tree4RadioButton);
+
+      modelsButtonGroup.add(tree5RadioButton);
+      tree5RadioButton.setText("tree 5");
+      tree5RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree5RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel3.add(tree5RadioButton);
+
+      modelsButtonGroup.add(tree6RadioButton);
+      tree6RadioButton.setText("tree 6");
+      tree6RadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            tree6RadioButtonActionPerformed(evt);
+         }
+      });
+      jPanel3.add(tree6RadioButton);
+
+      jPanel1.add(jPanel3);
+
+      gridBagConstraints = new java.awt.GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      exampleSelectionPanel.add(jPanel1, gridBagConstraints);
 
       splitPane.setLeftComponent(exampleSelectionPanel);
 
@@ -79,6 +177,36 @@ public class MainFrame extends javax.swing.JFrame
    {//GEN-HEADEREND:event_kochIslandRadioButtonActionPerformed
 		this.listener.setDolSystem (new examples.koch.Island ());
    }//GEN-LAST:event_kochIslandRadioButtonActionPerformed
+
+   private void tree2RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree2RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree2RadioButtonActionPerformed
+		this.listener.setDolSystem (Tree2D.createTree2 ());
+   }//GEN-LAST:event_tree2RadioButtonActionPerformed
+
+   private void tree1RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree1RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree1RadioButtonActionPerformed
+		this.listener.setDolSystem (Tree2D.createTree1 ());
+   }//GEN-LAST:event_tree1RadioButtonActionPerformed
+
+   private void tree3RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree3RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree3RadioButtonActionPerformed
+      this.listener.setDolSystem (Tree2D.createTree3 ());
+   }//GEN-LAST:event_tree3RadioButtonActionPerformed
+
+   private void tree4RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree4RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree4RadioButtonActionPerformed
+		this.listener.setDolSystem (Tree2D.createTree4 ());
+   }//GEN-LAST:event_tree4RadioButtonActionPerformed
+
+   private void tree5RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree5RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree5RadioButtonActionPerformed
+      this.listener.setDolSystem (Tree2D.createTree5 ());
+   }//GEN-LAST:event_tree5RadioButtonActionPerformed
+
+   private void tree6RadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tree6RadioButtonActionPerformed
+   {//GEN-HEADEREND:event_tree6RadioButtonActionPerformed
+      this.listener.setDolSystem (Tree2D.createTree6 ());
+   }//GEN-LAST:event_tree6RadioButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -124,7 +252,17 @@ public class MainFrame extends javax.swing.JFrame
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JPanel exampleSelectionPanel;
+   private javax.swing.JPanel jPanel1;
+   private javax.swing.JPanel jPanel2;
+   private javax.swing.JPanel jPanel3;
    private javax.swing.JRadioButton kochIslandRadioButton;
+   private javax.swing.ButtonGroup modelsButtonGroup;
    private javax.swing.JSplitPane splitPane;
+   private javax.swing.JRadioButton tree1RadioButton;
+   private javax.swing.JRadioButton tree2RadioButton;
+   private javax.swing.JRadioButton tree3RadioButton;
+   private javax.swing.JRadioButton tree4RadioButton;
+   private javax.swing.JRadioButton tree5RadioButton;
+   private javax.swing.JRadioButton tree6RadioButton;
    // End of variables declaration//GEN-END:variables
 }
