@@ -12,5 +12,14 @@ import javax.media.opengl.GL2;
  */
 public interface Symbol
 {
+	/**
+	 * Paint this symbol.
+	 * @param gl 
+	 */
 	public void paint (GL2 gl);
+	/**
+	 * Get the character code associated with this symbol.  Each symbol should have a unique character code.
+	 * @return The character code associated with this symbol.
+	 */
+	public char getCode ();
 }

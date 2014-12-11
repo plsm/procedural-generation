@@ -71,6 +71,14 @@ public class Word<S extends Symbol>
 	{
 		return symbols;
 	}
+	public String getSymbolCodesAsString ()
+	{
+		StringBuilder result = new StringBuilder (this.symbols.size ());
+		for (S s : this.symbols) {
+			result.append (s.getCode ());
+		}
+		return result.toString ();
+	}
 	/**
 	 * Return the length of this word.
 	 *

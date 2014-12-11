@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package examples.tree2d;
+package grammar.symbol;
 
 import grammar.Symbol;
 import javax.media.opengl.GL2;
@@ -38,6 +38,11 @@ public enum Bracket
 	private Bracket (char code)
 	{
 		this.code = code;
+	}
+	@Override
+	public char getCode ()
+	{
+		return this.code;
 	}
 	@Override
 	public String toString ()
