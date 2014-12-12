@@ -56,7 +56,7 @@ public class Island
 	
 	public Island ()
 	{
-		super (SEED, RULES);
+		super (SEED, RULES, -1);
 	}
 
 	public static enum Symbol

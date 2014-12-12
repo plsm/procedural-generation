@@ -76,6 +76,10 @@ final public class Rotate
 	{
 		return new Rotate ('/', Math.abs (angle), 1, 0, 0);
 	}
+	static public Rotate Backwards ()
+	{
+		return new Rotate ('|', 180, 1, 0, 0);
+	}
 	/**
 	 * Rotate instances are created using static methods.
 	 * @param code

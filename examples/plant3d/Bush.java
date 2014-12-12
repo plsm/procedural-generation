@@ -1,7 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package examples.plant3d;
 
 import grammar.Alphabet;
@@ -11,18 +13,19 @@ import grammar.Turtle;
 import grammar.Word;
 import grammar.symbol.Colour;
 import grammar.symbol.CurlyBracket;
+import grammar.symbol.Edge;
 import grammar.symbol.Forward;
-import grammar.symbol.Move;
 import grammar.symbol.Rotate;
 import grammar.symbol.SquareBracket;
 import grammar.symbol.Width;
 import javax.media.opengl.GL2;
 
 /**
+ * Represents the DOL-System presented in figure 1.25 from <i>The Algorithmic Beauty of Plants</i>.
  *
- * @author pedro
+ * @author Pedro Mariano
  */
-public class FlowerPlant
+public class Bush
 	extends DOL_System
 {
 	private static final Alphabet ALPHABET;
@@ -30,18 +33,18 @@ public class FlowerPlant
 	private static final int TARGET_DERIVATIONS = 7;
 	static
 	{
-		ALPHABET = FlowerPlant.createAlphabet ();
-		RULES = FlowerPlant.createProductions ();
+		ALPHABET = Bush.createAlphabet ();
+		RULES = Bush.createProductions ();
 		RULES.debug ();
 		System.out.println ();
 	}
 	private static Alphabet createAlphabet ()
 	{
 		int delta = 5;
-		float angle = 18f;
+		float angle = 22.5f;
 		return new Alphabet (
 			new Forward (delta, 1f, 0f, 0f),
-			new Move (delta),
+			new Edge (delta),
 			Rotate.Plus (angle),
 			Rotate.Minus (angle),
 			Rotate.Ampersand (angle),
@@ -52,44 +55,33 @@ public class FlowerPlant
 			SquareBracket.RIGHT,
 			CurlyBracket.LEFT,
 			CurlyBracket.RIGHT,
-			Symbol.PLANT,
-			Symbol.INTERNODE,
-			Symbol.FLOWER,
-			Symbol.LEAF,
-			Symbol.SEG,
-			Symbol.PEDICEL,
-			Symbol.WEDGE,
 			Colour.NEXT,
-			Width.DECREMENT
+			Width.DECREMENT,
+			Symbol.APEX,
+			Symbol.LEAF,
+			Symbol.STEM
 		);
 	}
 	private static Productions createProductions ()
 	{
 		Alphabet alphabet = createAlphabet ();
 		Productions rules = new Productions ();
-		rules.put ('p', "i+[p+o]--//[--l]i[++l]-[po]++po", alphabet);
-		rules.put ('i', "Fs[//&&l][//^^l]Fs", alphabet);
-		rules.put ('s', "sFs", alphabet);
-		rules.put ('l', "['{+f-ff-+|+f-ff-f}]", alphabet);
-		rules.put ('o', "[&&&e'{+f-ff-+|+f-ff-f}]", alphabet);
-		rules.put ('e', "FF", alphabet);
-		rules.put ('w', "['^F][{&&&&-f+f|-f+f}]", alphabet);
+		rules.put ('A', "[&FL!A]/////'[&FL!A]///////'[&FL!A]", alphabet);
+		rules.put ('F', "S/////F", alphabet);
+		rules.put ('S', "FL", alphabet);
+		rules.put ('L', "['''^^^{-f+f+f-|-f+f+f}]", alphabet);
 		return rules;
 	}
-	public FlowerPlant ()
+	public Bush ()
 	{
-		super (new Word (FlowerPlant.ALPHABET.get ('p')), FlowerPlant.RULES, FlowerPlant.TARGET_DERIVATIONS);
+		super (new Word (Bush.ALPHABET.get ('A')), Bush.RULES, Bush.TARGET_DERIVATIONS);
 	}
 	enum Symbol
 		implements grammar.Symbol
 	{
-		PLANT     ('p'),
-		INTERNODE ('i'),
-		FLOWER    ('o'),
-		LEAF      ('l'),
-		SEG       ('s'),
-		WEDGE     ('w'),
-		PEDICEL   ('e');
+		APEX ('A'),
+		LEAF ('L'),
+		STEM ('S');
 		
 		final private char code;
 

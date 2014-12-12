@@ -1,6 +1,7 @@
 package examples;
 
 import camera.AbstractCamera;
+import camera.OrbitCamera;
 import camera.SpaceCamera;
 import grammar.DOL_System;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.glu.GLU;
+import javax.swing.JTextArea;
 import projection.AbstractProjection;
 import projection.EditableProjection;
 
@@ -39,7 +41,9 @@ public class Listener
 	
 	DOL_System dolSystem;
 	
-	Listener (GLCanvas canvas)
+	private final JTextArea wordTextArea;
+	
+	Listener (GLCanvas canvas, JTextArea wordTextArea)
 	{
 		this.canvas = canvas;
 		//this.camera = new PlaneCamera ();
@@ -48,7 +52,12 @@ public class Listener
 			new double[] {0, 0, 3},
 			new float[] {0, 0, -1},
 			new float[] {0, 1, 0});
-		this.projection = new EditableProjection (true, 100, 100, 1, 10, 1, 1);
+		this.camera = new OrbitCamera (
+			new double[] {0, 0, 0},
+			3);
+		this.projection = new EditableProjection (true, 1000, 1000, 1, 100, 1, 1);
+		this.dolSystem = null;
+		this.wordTextArea = wordTextArea;
 		this.dolSystem = null;
 	}
 	
@@ -102,7 +111,11 @@ public class Listener
 			if (!this.projection.keyTyped (ke)) {
 				switch (ke.getKeyChar ()) {
 				case 'g':
-					this.dolSystem.grow ();
+					if (this.dolSystem == null) {
+						return ;
+					}
+					this.dolSystem.derive ();
+					this.wordTextArea.setText (this.dolSystem.getWordAsString ());
 					break;
 				default:
 					return;
@@ -137,6 +150,11 @@ public class Listener
 		System.out.println ("\n\n");
 		this.projection.status ();
 		this.camera.status ();
+	}
+
+	private void OrbitCamera (double[] d, int i)
+	{
+		throw new UnsupportedOperationException ("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 	
 }

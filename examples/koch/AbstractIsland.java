@@ -56,7 +56,7 @@ public class AbstractIsland
 	
 	public AbstractIsland ()
 	{
-		super (SEED, RULES);
+		super (SEED, RULES, -1);
 	}
 
 	public static enum Symbol

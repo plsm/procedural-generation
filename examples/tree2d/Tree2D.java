@@ -52,45 +52,49 @@ public class Tree2D
 	 */
 	static public Tree2D createTree1 ()
 	{
+		int targetDerivations = 5;
 		int delta = 5;
 		float angle = 25.7f;
 		Alphabet alphabet = createAlphabet (delta, angle);
 		Word seed = new Word<> (alphabet.get ('F'));
 		Productions rules = new Productions ();
 		rules.put ('F', "F[+F]F[-F]F", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * Generate a tree by calculating <i>n=5</i> derivations.
 	 */
 	static public Tree2D createTree2 ()
 	{
+		int targetDerivations = 5;
 		int delta = 5;
 		int angle = 20;
 		Alphabet alphabet = createAlphabet (delta, angle);
 		Word seed = new Word<> (alphabet.get ('F'));
 		Productions rules = new Productions ();
 		rules.put ('F', "F[+F]F[-F][F]", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * Generate a tree by calculating <i>n=4</i> derivations.
 	 */
 	static public Tree2D createTree3 ()
 	{
+		int targetDerivations = 4;
 		int delta = 5;
 		float angle = 22.5f;
 		Alphabet alphabet = createAlphabet (delta, angle);
 		Word seed = new Word<> (alphabet.get ('F'));
 		Productions rules = new Productions ();
 		rules.put ('F', "FF-[-F+F+F]+[+F-F-F]", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * Generate a tree by calculating <i>n=7</i> derivations.
 	 */
 	static public Tree2D createTree4 ()
 	{
+		int targetDerivations = 7;
 		int delta = 5;
 		float angle = 20;
 		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
@@ -98,13 +102,14 @@ public class Tree2D
 		Productions rules = new Productions ();
 		rules.put ('X', "F[+X]F[-X]+X", alphabet);
 		rules.put ('F', "FF", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * Generate a tree by calculating <i>n=7</i> derivations.
 	 */
 	static public Tree2D createTree5 ()
 	{
+		int targetDerivations = 7;
 		int delta = 5;
 		float angle = 25.7f;
 		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
@@ -112,13 +117,14 @@ public class Tree2D
 		Productions rules = new Productions ();
 		rules.put ('X', "F[+X][-X]FX", alphabet);
 		rules.put ('F', "FF", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * Generate a tree by calculating <i>n=5</i> derivations.
 	 */
 	static public Tree2D createTree6 ()
 	{
+		int targetDerivations = 5;
 		int delta = 5;
 		float angle = 22.5f;
 		Alphabet alphabet = createAlphabetWithSteam (delta, angle);
@@ -126,16 +132,16 @@ public class Tree2D
 		Productions rules = new Productions ();
 		rules.put ('X', "F-[[X]+X]+F[+FX]-X", alphabet);
 		rules.put ('F', "FF", alphabet);
-		return new Tree2D (seed, rules);
+		return new Tree2D (seed, rules, targetDerivations);
 	}
 	/**
 	 * 
 	 * @param seed
 	 * @param rules 
 	 */
-	private Tree2D (Word seed, Productions rules)
+	private Tree2D (Word seed, Productions rules, int targetDerivations)
 	{
-		super (seed, rules);
+		super (seed, rules, targetDerivations);
 		rules.debug ();
 		System.out.println ();
 	}

@@ -10,6 +10,7 @@ import javax.media.opengl.GL2;
  * @author Pedro Mariano
  */
 public class Word<S extends Symbol>
+	implements Cloneable
 {
 	/**
 	 * The symbols that make up this word.
@@ -28,16 +29,30 @@ public class Word<S extends Symbol>
 	/**
 	 * Construct a self drawing word with a symbol seed.
 	 *
-	 * @param seed 
+	 * @param symbols
 	 */
 	public Word (S[] symbols)
 	{
 		this.symbols = new LinkedList<> (java.util.Arrays.asList (symbols));
 	}
 	/**
+	 * Copy constructor.
+	 * @param other 
+	 */
+	public Word (Word other)
+	{
+		this.symbols = new LinkedList<> (other.symbols);
+	}
+	@Override
+	public Word<S> clone ()
+	{
+		return new Word (this);
+	}
+	/**
 	 * Paint this word.  Each symbol of the alphabet is responsible for drawing.
 	 *
 	 * @param gl 
+	 * @param turtle 
 	 */
 	final public void paint (GL2 gl, Turtle turtle)
 	{
@@ -51,6 +66,7 @@ public class Word<S extends Symbol>
 	 * Paint this word and write each symbol to standard output.  Each symbol of the alphabet is responsible for drawing.
 	 *
 	 * @param gl 
+	 * @param turtle 
 	 */
 	final public void paintDebug (GL2 gl, Turtle turtle)
 	{

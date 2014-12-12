@@ -6,7 +6,11 @@
 
 package examples;
 
+import examples.plant3d.Bush;
+import examples.plant3d.FlowerPlant;
 import examples.tree2d.Tree2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.GLProfile;
@@ -34,10 +38,10 @@ public class MainFrame extends javax.swing.JFrame
 		GLProfile glp = GLProfile.getDefault ();
 		GLCapabilities caps = new GLCapabilities (glp);
 		this.canvas = new GLCanvas (caps);
-		this.listener = new Listener (this.canvas);
+		initComponents ();
+		this.listener = new Listener (this.canvas, this.wordTextArea);
 		canvas.addGLEventListener (this.listener);
 		canvas.addKeyListener (this.listener);
-		initComponents ();
 	}
 
 	/**
@@ -53,6 +57,7 @@ public class MainFrame extends javax.swing.JFrame
 
       modelsButtonGroup = new javax.swing.ButtonGroup();
       splitPane = new javax.swing.JSplitPane();
+      controlPanel = new javax.swing.JPanel();
       exampleSelectionPanel = new javax.swing.JPanel();
       kochIslandRadioButton = new javax.swing.JRadioButton();
       jPanel1 = new javax.swing.JPanel();
@@ -64,11 +69,22 @@ public class MainFrame extends javax.swing.JFrame
       tree4RadioButton = new javax.swing.JRadioButton();
       tree5RadioButton = new javax.swing.JRadioButton();
       tree6RadioButton = new javax.swing.JRadioButton();
+      flower3DRadioButton = new javax.swing.JRadioButton();
+      bush3DRadioButton = new javax.swing.JRadioButton();
+      dolSystemPanel = new javax.swing.JPanel();
+      jScrollPane1 = new javax.swing.JScrollPane();
+      wordTextArea = new javax.swing.JTextArea();
+      buttonsPanel = new javax.swing.JPanel();
+      deriveButton = new javax.swing.JButton();
+      deriveToTargetButton = new javax.swing.JButton();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       setMinimumSize(new java.awt.Dimension(800, 600));
       setPreferredSize(new java.awt.Dimension(800, 600));
 
+      controlPanel.setLayout(new java.awt.BorderLayout());
+
+      exampleSelectionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
       exampleSelectionPanel.setLayout(new java.awt.GridBagLayout());
 
       modelsButtonGroup.add(kochIslandRadioButton);
@@ -165,7 +181,69 @@ public class MainFrame extends javax.swing.JFrame
       gridBagConstraints.gridx = 0;
       exampleSelectionPanel.add(jPanel1, gridBagConstraints);
 
-      splitPane.setLeftComponent(exampleSelectionPanel);
+      modelsButtonGroup.add(flower3DRadioButton);
+      flower3DRadioButton.setText("3D flower");
+      flower3DRadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            flower3DRadioButtonActionPerformed(evt);
+         }
+      });
+      gridBagConstraints = new java.awt.GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      exampleSelectionPanel.add(flower3DRadioButton, gridBagConstraints);
+
+      modelsButtonGroup.add(bush3DRadioButton);
+      bush3DRadioButton.setText("3D bush");
+      bush3DRadioButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            bush3DRadioButtonActionPerformed(evt);
+         }
+      });
+      gridBagConstraints = new java.awt.GridBagConstraints();
+      gridBagConstraints.gridx = 0;
+      exampleSelectionPanel.add(bush3DRadioButton, gridBagConstraints);
+
+      controlPanel.add(exampleSelectionPanel, java.awt.BorderLayout.CENTER);
+
+      dolSystemPanel.setLayout(new java.awt.BorderLayout());
+
+      wordTextArea.setColumns(20);
+      wordTextArea.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+      wordTextArea.setLineWrap(true);
+      wordTextArea.setRows(5);
+      jScrollPane1.setViewportView(wordTextArea);
+
+      dolSystemPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+      deriveButton.setText("Derive");
+      deriveButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            deriveButtonActionPerformed(evt);
+         }
+      });
+      buttonsPanel.add(deriveButton);
+
+      deriveToTargetButton.setText("Derive to Target");
+      deriveToTargetButton.addActionListener(new java.awt.event.ActionListener()
+      {
+         public void actionPerformed(java.awt.event.ActionEvent evt)
+         {
+            deriveToTargetButtonActionPerformed(evt);
+         }
+      });
+      buttonsPanel.add(deriveToTargetButton);
+
+      dolSystemPanel.add(buttonsPanel, java.awt.BorderLayout.SOUTH);
+
+      controlPanel.add(dolSystemPanel, java.awt.BorderLayout.SOUTH);
+
+      splitPane.setLeftComponent(controlPanel);
 
       getContentPane().add(splitPane, java.awt.BorderLayout.CENTER);
       this.splitPane.setRightComponent (this.canvas);
@@ -207,6 +285,28 @@ public class MainFrame extends javax.swing.JFrame
    {//GEN-HEADEREND:event_tree6RadioButtonActionPerformed
       this.listener.setDolSystem (Tree2D.createTree6 ());
    }//GEN-LAST:event_tree6RadioButtonActionPerformed
+
+   private void flower3DRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_flower3DRadioButtonActionPerformed
+   {//GEN-HEADEREND:event_flower3DRadioButtonActionPerformed
+      this.listener.setDolSystem (new FlowerPlant ());
+   }//GEN-LAST:event_flower3DRadioButtonActionPerformed
+
+   private void deriveButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deriveButtonActionPerformed
+   {//GEN-HEADEREND:event_deriveButtonActionPerformed
+		this.listener.dolSystem.derive ();
+		this.canvas.display ();
+   }//GEN-LAST:event_deriveButtonActionPerformed
+
+   private void deriveToTargetButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deriveToTargetButtonActionPerformed
+   {//GEN-HEADEREND:event_deriveToTargetButtonActionPerformed
+      this.listener.dolSystem.deriveToTarget ();
+		this.canvas.display ();
+   }//GEN-LAST:event_deriveToTargetButtonActionPerformed
+
+   private void bush3DRadioButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_bush3DRadioButtonActionPerformed
+   {//GEN-HEADEREND:event_bush3DRadioButtonActionPerformed
+      this.listener.setDolSystem (new Bush ());
+   }//GEN-LAST:event_bush3DRadioButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -251,10 +351,18 @@ public class MainFrame extends javax.swing.JFrame
 	}
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JRadioButton bush3DRadioButton;
+   private javax.swing.JPanel buttonsPanel;
+   private javax.swing.JPanel controlPanel;
+   private javax.swing.JButton deriveButton;
+   private javax.swing.JButton deriveToTargetButton;
+   private javax.swing.JPanel dolSystemPanel;
    private javax.swing.JPanel exampleSelectionPanel;
+   private javax.swing.JRadioButton flower3DRadioButton;
    private javax.swing.JPanel jPanel1;
    private javax.swing.JPanel jPanel2;
    private javax.swing.JPanel jPanel3;
+   private javax.swing.JScrollPane jScrollPane1;
    private javax.swing.JRadioButton kochIslandRadioButton;
    private javax.swing.ButtonGroup modelsButtonGroup;
    private javax.swing.JSplitPane splitPane;
@@ -264,5 +372,6 @@ public class MainFrame extends javax.swing.JFrame
    private javax.swing.JRadioButton tree4RadioButton;
    private javax.swing.JRadioButton tree5RadioButton;
    private javax.swing.JRadioButton tree6RadioButton;
+   private javax.swing.JTextArea wordTextArea;
    // End of variables declaration//GEN-END:variables
 }

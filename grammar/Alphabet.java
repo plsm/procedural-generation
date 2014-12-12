@@ -1,28 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package grammar;
 
-import grammar.symbol.Stem;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  *
  * @author pedro
+ * @param <S>
  */
 public class Alphabet<S extends Symbol>
 {
 	private final Map<Character, S> alphabet;
-	/*s
-	public Alphabet (S[] alphabet)
-	{
-		this.alphabet = new HashMap<> (alphabet.length);
-		for (S s : alphabet) {
-			this.alphabet.put (s.getCode (), s);
-		}
-	}*/
 	public Alphabet (S... alphabet)
 	{
 		this.alphabet = new HashMap<> (alphabet.length);
@@ -42,5 +30,10 @@ public class Alphabet<S extends Symbol>
 	{
 		this.alphabet.put (symbol.getCode (), symbol);
 		return this;
+	}
+	@Override
+	public String toString ()
+	{
+		return this.alphabet.toString ();
 	}
 }

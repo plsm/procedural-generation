@@ -49,12 +49,14 @@ final public class Productions<S extends Symbol>
 		LinkedList<S> sBody = new LinkedList<> ();
 		S sHead = alphabet.get (head);
 		if (sHead == null) {
-			return false;
+			throw new RuntimeException ("There is no symbol for " + head + ", alphabet is " + alphabet);
+//			return false;
 		}
 		for (char aChar : body.toCharArray ()) {
 			S sAChar = alphabet.get (aChar);
 			if (sAChar == null) {
-				return false;
+				throw new RuntimeException ("There is no symbol for " + aChar + ", alphabet is " + alphabet);
+//				return false;
 			}
 			sBody.add (sAChar);
 		}

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package projection;
 
 import java.awt.event.KeyEvent;
@@ -23,10 +19,10 @@ public class EditableProjection
 	 */
 	final float DELTA;
 	/**
-	 * Construct an editable projection
-	 * @param perspectiveProjection
-	 * @param horizontal
-	 * @param vertical initial distance if the top and bottom planes.
+	 * Construct an editable projection.
+	 * @param perspectiveProjection start with a perpective projection.
+	 * @param horizontal initial distance of the left and right planes.
+	 * @param vertical initial distance of the top and bottom planes.
 	 * @param near initial distance of the near plane.
 	 * @param far initial distance of the far plane.
 	 * @param min The minimum value of the distance between the center axis and the left, right, bottom, up and near planes.
@@ -39,12 +35,12 @@ public class EditableProjection
 		this.DELTA = Math.abs (delta);
 	}
 	/**
-	 * 
-	 * @param perspectiveProjection
-	 * @param horizontal
-	 * @param vertical
-	 * @param near
-	 * @param far 
+	 * Construct an editable projection where each plane moves 1 unit per user command.
+	 * @param perspectiveProjection start with a perpective projection.
+	 * @param horizontal initial distance of the left and right planes.
+	 * @param vertical initial distance of the top and bottom planes.
+	 * @param near initial distance of the near plane.
+	 * @param far initial distance of the far plane.
 	 */
 	public EditableProjection (boolean perspectiveProjection, int horizontal, int vertical, int near, int far)
 	{

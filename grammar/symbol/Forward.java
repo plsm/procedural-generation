@@ -1,6 +1,5 @@
 package grammar.symbol;
 
-import grammar.AbstractSymbol;
 import grammar.Turtle;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -19,6 +18,7 @@ final public class Forward
 	/**
 	 * 
 	 * @param delta 
+	 * @param red 
 	 */
 	public Forward (int delta, float red, float green, float blue)
 	{
@@ -28,6 +28,7 @@ final public class Forward
 	/**
 	 * 
 	 * @param gl 
+	 * @param turtle 
 	 */
 	@Override
 	public void paint (GL2 gl, Turtle turtle)
