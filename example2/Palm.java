@@ -6,6 +6,7 @@ package example2;
 
 import grammar.Algorithm;
 import grammar.Productions;
+import grammar.Turtle;
 import grammar.Word;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -45,7 +46,7 @@ public class Palm
 	
 	void paint (GL2 gl)
 	{
-		this.word.paintDebug (gl);
+		this.word.paintDebug (gl, null);
 	}
 	
 	void grow ()
@@ -61,7 +62,7 @@ public class Palm
 		NEW_TRUNK ('T')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0.75f, 0, 0);
 				gl.glBegin (GL2.GL_QUAD_STRIP);
@@ -81,7 +82,7 @@ public class Palm
 		OLD_TRUNK ('T')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0.5f, 0.1f, 0);
 				gl.glBegin (GL2.GL_QUAD_STRIP);
@@ -101,7 +102,7 @@ public class Palm
 		TRUNK_STEM ('s')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0.25f, 1, 0.25f);
 				gl.glBegin (GL.GL_LINE_STRIP);
@@ -114,7 +115,7 @@ public class Palm
 		LEAF_STEM ('l')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0.25f, 1, 0.25f);
 				gl.glBegin (GL.GL_LINE_STRIP);
@@ -127,7 +128,7 @@ public class Palm
 		LEAF ('L')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0, 1, 0);
 				gl.glBegin (GL.GL_LINE_STRIP);
@@ -140,7 +141,7 @@ public class Palm
 		LEFT_PARENTHIS ('[')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glPushMatrix ();
 			}
@@ -148,7 +149,7 @@ public class Palm
 		RIGHT_PARENTHIS (']')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glPopMatrix ();
 			}
@@ -171,7 +172,7 @@ public class Palm
 			return String.valueOf (this.code);
 		}
 		@Override
-		public abstract void paint (GL2 gl);
+		public abstract void paint (GL2 gl, Turtle turtle);
 
 	}
 }

@@ -39,11 +39,11 @@ public class Word<S extends Symbol>
 	 *
 	 * @param gl 
 	 */
-	final public void paint (GL2 gl)
+	final public void paint (GL2 gl, Turtle turtle)
 	{
 		gl.glPushMatrix ();
 		for (S s : this.symbols) {
-			s.paint (gl);
+			s.paint (gl, turtle);
 		}
 		gl.glPopMatrix ();
 	}
@@ -52,12 +52,12 @@ public class Word<S extends Symbol>
 	 *
 	 * @param gl 
 	 */
-	final public void paintDebug (GL2 gl)
+	final public void paintDebug (GL2 gl, Turtle turtle)
 	{
 		gl.glPushMatrix ();
 		for (S s : this.symbols) {
 			System.out.print (s);
-			s.paint (gl);
+			s.paint (gl, turtle);
 		}
 		gl.glPopMatrix ();
 		System.out.println ();

@@ -7,6 +7,7 @@
 package grammar.symbol;
 
 import grammar.Symbol;
+import grammar.Turtle;
 import javax.media.opengl.GL2;
 
 /**
@@ -19,7 +20,7 @@ public enum CurlyBracket
 	LEFT ('{')
 	{
 		@Override
-		public void paint (GL2 gl)
+		public void paint (GL2 gl, Turtle turtle)
 		{
 			gl.glBegin (GL2.GL_POLYGON);
 		}
@@ -27,7 +28,7 @@ public enum CurlyBracket
 	RIGHT ('}')
 	{
 		@Override
-		public void paint (GL2 gl)
+		public void paint (GL2 gl, Turtle turtle)
 		{
 			gl.glEnd ();
 		}
@@ -44,6 +45,8 @@ public enum CurlyBracket
 	{
 		return this.code;
 	}
+	@Override
+	abstract public void paint (GL2 gl, Turtle turtle);
 	@Override
 	public String toString ()
 	{

@@ -5,7 +5,10 @@
 package examples.plant3d;
 
 import grammar.Alphabet;
+import grammar.DOL_System;
 import grammar.Productions;
+import grammar.Turtle;
+import grammar.Word;
 import grammar.symbol.CurlyBracket;
 import grammar.symbol.SquareBracket;
 import grammar.symbol.Forward;
@@ -18,6 +21,7 @@ import javax.media.opengl.GL2;
  * @author pedro
  */
 public class FlowerPlant
+	extends DOL_System
 {
 	private static Alphabet createAlphabet ()
 	{
@@ -34,7 +38,14 @@ public class FlowerPlant
 			SquareBracket.LEFT,
 			SquareBracket.RIGHT,
 			CurlyBracket.LEFT,
-			CurlyBracket.RIGHT
+			CurlyBracket.RIGHT,
+			Symbol.PLANT,
+			Symbol.INTERNODE,
+			Symbol.FLOWER,
+			Symbol.LEAF,
+			Symbol.SEG,
+			Symbol.PEDICEL,
+			Symbol.WEDGE
 		);
 	}
 	private static Productions createProductions ()
@@ -46,8 +57,15 @@ public class FlowerPlant
 		rules.put ('s', "sFs", alphabet);
 		rules.put ('l', "['{+f-ff-+|+f-ff-f}]", alphabet);
 		rules.put ('o', "[&&&e'{+f-ff-+|+f-ff-f}]", alphabet);
+		rules.put ('e', "FF", alphabet);
+		rules.put ('w', "['^F][{&&&&−f+f|−f+f}]", alphabet);
 		return rules;
-		
+	}
+	private FlowerPlant (Word seed, Productions rules)
+	{
+		super (seed, rules);
+		rules.debug ();
+		System.out.println ();
 	}
 	enum Symbol
 		implements grammar.Symbol
@@ -72,7 +90,7 @@ public class FlowerPlant
 			return this.code;
 		}
 		@Override
-		public void paint (GL2 gl)
+		public void paint (GL2 gl, Turtle turtle)
 		{
 		}
 		@Override

@@ -16,7 +16,7 @@ public interface Symbol
 	 * Paint this symbol.
 	 * @param gl 
 	 */
-	public void paint (GL2 gl);
+	public void paint (GL2 gl, Turtle turtle);
 	/**
 	 * Get the character code associated with this symbol.  Each symbol should have a unique character code.
 	 * @return The character code associated with this symbol.

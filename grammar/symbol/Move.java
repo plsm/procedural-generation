@@ -5,6 +5,7 @@
 package grammar.symbol;
 
 import grammar.AbstractSymbol;
+import grammar.Turtle;
 import javax.media.opengl.GL2;
 
 /**
@@ -29,7 +30,7 @@ final public class Move
 	}
 
 	@Override
-	public void paint (GL2 gl)
+	public void paint (GL2 gl, Turtle turtle)
 	{
 		gl.glTranslatef (this.delta, 0, 0);
 	}

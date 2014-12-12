@@ -29,6 +29,10 @@ public class DOL_System<S extends Symbol>
 	protected int numberGrowths;
 	/**
 	 * 
+	 */
+	final private Turtle turtle;
+	/**
+	 * 
 	 * @param word
 	 * @param rules 
 	 */
@@ -37,6 +41,7 @@ public class DOL_System<S extends Symbol>
 		this.word = word;
 		this.rules = rules;
 		this.numberGrowths = 0;
+		this.turtle = new Turtle ();
 	}
 	/**
 	 * 
@@ -44,7 +49,8 @@ public class DOL_System<S extends Symbol>
 	 */
 	final public void paint (GL2 gl)
 	{
-		this.word.paint (gl);
+		this.turtle.reset ();
+		this.word.paint (gl, turtle);
 	}
 	
 	final public void grow ()

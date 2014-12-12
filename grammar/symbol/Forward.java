@@ -1,6 +1,7 @@
 package grammar.symbol;
 
 import grammar.AbstractSymbol;
+import grammar.Turtle;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 
@@ -29,13 +30,17 @@ final public class Forward
 	 * @param gl 
 	 */
 	@Override
-	public void paint (GL2 gl)
+	public void paint (GL2 gl, Turtle turtle)
 	{
 		gl.glColor3f (this.red, this.green, this.blue);
-		gl.glBegin (GL.GL_LINE_STRIP);
+		if (!turtle.specifyingPolygonBoundary) {
+			gl.glBegin (GL.GL_LINE_STRIP);
+		}
 		gl.glVertex3d (0, 0, 0);
 		gl.glVertex3d (0, delta, 0);
-		gl.glEnd ();
+		if (!turtle.specifyingPolygonBoundary) {
+			gl.glEnd ();
+		}
 		gl.glTranslated (0, delta, 0);
 	}
 }

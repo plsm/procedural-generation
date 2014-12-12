@@ -5,6 +5,7 @@
 package grammar.symbol;
 
 import grammar.AbstractSymbol;
+import grammar.Turtle;
 import javax.media.opengl.GL2;
 
 /**
@@ -92,7 +93,7 @@ final public class Rotate
 		this.axisZ = axisZ;
 	}
 	@Override
-	public void paint (GL2 gl)
+	public void paint (GL2 gl, Turtle turtle)
 	{
 		gl.glRotatef (this.angle, this.axisX, this.axisY, this.axisZ);
 	}

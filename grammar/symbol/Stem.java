@@ -5,6 +5,7 @@
 package grammar.symbol;
 
 import grammar.Symbol;
+import grammar.Turtle;
 import javax.media.opengl.GL2;
 
 /**
@@ -23,7 +24,7 @@ public enum Stem
 	 * @param gl 
 	 */
 	@Override
-	public void paint (GL2 gl)
+	public void paint (GL2 gl, Turtle turtle)
 	{
 		
 	}
