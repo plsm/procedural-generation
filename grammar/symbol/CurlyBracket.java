@@ -13,29 +13,29 @@ import javax.media.opengl.GL2;
  *
  * @author pedro
  */
-public enum Bracket
+public enum CurlyBracket
 	implements Symbol
 {
-	LEFT ('[')
+	LEFT ('{')
 	{
 		@Override
 		public void paint (GL2 gl)
 		{
-			gl.glPushMatrix ();
+			gl.glBegin (GL2.GL_POLYGON);
 		}
 	},
-	RIGHT (']')
+	RIGHT ('}')
 	{
 		@Override
 		public void paint (GL2 gl)
 		{
-			gl.glPopMatrix ();
+			gl.glEnd ();
 		}
 	};
 	
 	final private char code;
 
-	private Bracket (char code)
+	private CurlyBracket (char code)
 	{
 		this.code = code;
 	}

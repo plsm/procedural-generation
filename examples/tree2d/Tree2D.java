@@ -6,7 +6,7 @@
 
 package examples.tree2d;
 
-import grammar.symbol.Bracket;
+import grammar.symbol.SquareBracket;
 import grammar.Alphabet;
 import grammar.DOL_System;
 import grammar.Productions;
@@ -33,17 +33,15 @@ public class Tree2D
 	static private Alphabet createAlphabet (int delta, float angle)
 	{
 		Forward forward = new Forward (delta, 1f, 0f, 0f);
-		Move move = new Move (delta);
 		Rotate plus = Rotate.Plus (angle);
 		Rotate minus = Rotate.Minus (angle);
-		return new Alphabet (new Symbol[] {
+		return new Alphabet (
 			forward,
-			move,
 			plus,
 			minus,
-			Bracket.LEFT,
-			Bracket.RIGHT
-		});
+			SquareBracket.LEFT,
+			SquareBracket.RIGHT
+		);
 	}
 	static private Alphabet createAlphabetWithSteam (int delta, float angle)
 	{
@@ -139,5 +137,6 @@ public class Tree2D
 	{
 		super (seed, rules);
 		rules.debug ();
+		System.out.println ();
 	}
 }

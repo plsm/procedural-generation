@@ -15,12 +15,21 @@ import java.util.Map;
 public class Alphabet<S extends Symbol>
 {
 	private final Map<Character, S> alphabet;
-	
+	/*s
 	public Alphabet (S[] alphabet)
 	{
 		this.alphabet = new HashMap<> (alphabet.length);
 		for (S s : alphabet) {
 			this.alphabet.put (s.getCode (), s);
+		}
+	}*/
+	public Alphabet (S... alphabet)
+	{
+		this.alphabet = new HashMap<> (alphabet.length);
+		for (S s : alphabet) {
+			if (s != null) {
+				this.alphabet.put (s.getCode (), s);
+			}
 		}
 	}
 	
