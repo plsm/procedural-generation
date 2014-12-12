@@ -2,6 +2,7 @@ package examples.koch;
 
 import grammar.DOL_System;
 import grammar.Productions;
+import grammar.Turtle;
 import grammar.Word;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -64,7 +65,7 @@ public class AbstractIsland
 		FORWARD ('F')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glColor3f (0.25f, 1, 0.25f);
 				gl.glBegin (GL.GL_LINE_STRIP);
@@ -80,7 +81,7 @@ public class AbstractIsland
 		LEFT ('+')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glRotatef (90, 0, 0, 1);
 			}
@@ -88,7 +89,7 @@ public class AbstractIsland
 		RIGHT ('+')
 		{
 			@Override
-			public void paint (GL2 gl)
+			public void paint (GL2 gl, Turtle turtle)
 			{
 				gl.glRotatef (-90, 0, 0, 1);
 			}
@@ -112,6 +113,6 @@ public class AbstractIsland
 			return String.valueOf (this.code);
 		}
 		@Override
-		public abstract void paint (GL2 gl);
+		public abstract void paint (GL2 gl, Turtle turtle);
 	}
 }
